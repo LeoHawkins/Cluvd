@@ -18,7 +18,7 @@ Senior Cloud/DevOps Engineer | AWS | Terraform | Azure DevOps
 
 <br>
 
-[Website](https://clarp.lol) · [Docs](#documentation) · [Whitepaper](#whitepaper) · [Discord](#community)
+[Website](cluvd.leohawkins.com) · [Docs](#documentation) · [Whitepaper](#whitepaper) · [Discord](#community)
 
 <sub>none of those links work btw</sub>
 
