@@ -1,0 +1,881 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+:root {
+  --ivory-light: #FAF9F5;
+  --ivory-medium: #F0EEE6;
+  --ivory-dark: #E8E6DC;
+  --slate-dark: #0a0a09;
+  --slate-medium: #3D3D3A;
+  --slate-light: #5E5D59;
+  --clay: #D97757;
+  --clay-deep: #C6613F;
+  --cloud-light: #D1CFC5;
+  --cloud-medium: #B0AEA5;
+  --danger-orange: #FF6B35;
+  --danger-black: #0a0a09;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Disable pinch-to-zoom and double-tap zoom on iOS Safari (iOS 10+ ignores viewport meta) */
+    touch-action: pan-x pan-y;
+  }
+
+  body {
+    @apply bg-ivory-light text-slate-dark font-mono;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Safe area support for notched phones */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    /* Disable pinch-to-zoom and double-tap zoom on iOS Safari */
+    touch-action: pan-x pan-y;
+  }
+
+  /* Body scroll lock when modal is open */
+  body:has([data-modal-open="true"]) {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  ::selection {
+    @apply bg-danger-orange text-black;
+  }
+
+  /* lowercase everything */
+  h1, h2, h3, h4, h5, h6, button, .badge, nav a {
+    text-transform: lowercase;
+  }
+}
+
+@layer components {
+  /* Terminal styling - more industrial */
+  .terminal {
+    @apply bg-slate-dark text-ivory-light font-mono overflow-hidden;
+    border: 2px solid var(--danger-orange);
+    box-shadow:
+      0 0 0 1px rgba(255, 107, 53, 0.3),
+      0 0 30px rgba(255, 107, 53, 0.1),
+      inset 0 0 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .terminal-header {
+    @apply flex items-center gap-2 px-4 py-3 border-b-2 border-danger-orange/50;
+    background: linear-gradient(90deg, rgba(255, 107, 53, 0.1), transparent);
+  }
+
+  .terminal-dot {
+    @apply w-3 h-3 rounded-none;
+  }
+
+  .terminal-body {
+    @apply p-4 sm:p-6 overflow-x-auto;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 107, 53, 0.03) 2px,
+        rgba(255, 107, 53, 0.03) 4px
+      );
+  }
+
+  .terminal-prompt::before {
+    content: '$ ';
+    @apply text-danger-orange;
+  }
+
+  /* Glitch effect - more aggressive */
+  .glitch {
+    position: relative;
+    animation: glitch-skew 4s infinite linear alternate-reverse;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch::before {
+    left: 3px;
+    text-shadow: -3px 0 #FF6B35;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim-1 1.5s infinite linear alternate-reverse;
+  }
+
+  .glitch::after {
+    left: -3px;
+    text-shadow: 3px 0 #E74C3C;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim-2 1.5s infinite linear alternate-reverse;
+  }
+
+  /* Progress bar that gets stuck - industrial style */
+  .progress-stuck {
+    @apply relative h-3 bg-slate-dark overflow-hidden;
+    border: 1px solid var(--danger-orange);
+  }
+
+  .progress-stuck::after {
+    content: '';
+    @apply absolute inset-y-0 left-0;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--danger-orange),
+      var(--danger-orange) 10px,
+      var(--clay-deep) 10px,
+      var(--clay-deep) 20px
+    );
+    animation: progress-stuck 3s ease-in-out infinite;
+  }
+
+  /* Coming soon button - broken looking */
+  .btn-coming-soon {
+    @apply relative px-6 py-3 bg-slate-dark text-ivory-light font-mono text-sm;
+    @apply border-2 border-danger-orange cursor-not-allowed;
+    @apply transition-all duration-200;
+    text-transform: lowercase;
+  }
+
+  .btn-coming-soon:hover {
+    animation: glitch 0.15s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+  }
+
+  .btn-coming-soon::after {
+    content: '(never)';
+    @apply absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-danger-orange whitespace-nowrap;
+  }
+
+  /* Satirical card - harsh edges */
+  .larp-card {
+    @apply relative bg-ivory-medium border-2 border-slate-dark;
+    @apply transition-all duration-300;
+    box-shadow: 4px 4px 0 var(--slate-dark);
+  }
+
+  .larp-card:hover {
+    @apply border-danger-orange;
+    box-shadow: 6px 6px 0 var(--danger-orange);
+    transform: translate(-2px, -2px);
+  }
+
+  .larp-card::before {
+    content: '×';
+    @apply absolute -top-3 -right-3 w-8 h-8 flex items-center justify-center text-sm font-bold;
+    background: var(--danger-orange);
+    color: black;
+  }
+
+  /* Badge styles - rougher */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 text-xs font-mono;
+    border: 1px solid currentColor;
+    text-transform: lowercase;
+  }
+
+  .badge-warning {
+    @apply bg-danger-orange/20 text-danger-orange border-danger-orange;
+  }
+
+  .badge-error {
+    @apply bg-larp-red/20 text-larp-red border-larp-red;
+  }
+
+  .badge-success {
+    @apply bg-larp-green/20 text-larp-green border-larp-green;
+  }
+
+  .badge-larp {
+    @apply bg-clay/20 text-clay border-clay;
+  }
+
+  .badge-default {
+    @apply bg-slate-medium/20 text-slate-light border-slate-light;
+  }
+
+  /* ASCII art container */
+  .ascii-art {
+    @apply font-mono text-[10px] sm:text-xs leading-none whitespace-pre;
+    text-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+  }
+
+  /* DANGER STRIPE - ORANGE AND BLACK */
+  .construction-stripe {
+    background: repeating-linear-gradient(
+      45deg,
+      #FF6B35,
+      #FF6B35 10px,
+      #0a0a09 10px,
+      #0a0a09 20px
+    );
+    background-size: 28.28px 28.28px; /* sqrt(20^2 + 20^2) for perfect loop */
+    animation: stripe-move 1s linear infinite;
+  }
+
+  /* Harsh button styles */
+  .btn-primary {
+    @apply px-4 sm:px-6 py-2.5 sm:py-3 bg-danger-orange text-black font-mono font-bold text-sm sm:text-base;
+    @apply border-2 border-black transition-all duration-150;
+    box-shadow: 4px 4px 0 black;
+    text-transform: lowercase;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 2px 2px 0 black;
+    transform: translate(2px, 2px);
+  }
+
+  .btn-primary:active {
+    box-shadow: 0 0 0 black;
+    transform: translate(4px, 4px);
+  }
+
+  .btn-secondary {
+    @apply px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent text-slate-dark font-mono text-sm sm:text-base;
+    @apply border-2 border-slate-dark transition-all duration-150;
+    box-shadow: 4px 4px 0 var(--slate-dark);
+    text-transform: lowercase;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-slate-dark text-ivory-light;
+    box-shadow: 2px 2px 0 var(--slate-dark);
+    transform: translate(2px, 2px);
+  }
+
+  .btn-outline {
+    @apply px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent text-danger-orange font-mono text-sm sm:text-base;
+    @apply border-2 border-danger-orange transition-all duration-150 cursor-pointer;
+    text-transform: lowercase;
+    box-shadow: 4px 4px 0 var(--danger-orange);
+  }
+
+  .btn-outline:hover {
+    @apply bg-danger-orange text-black;
+    box-shadow: 2px 2px 0 var(--danger-orange);
+    transform: translate(2px, 2px);
+  }
+
+  /* Scanlines overlay */
+  .scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay {
+    position: relative;
+  }
+
+  .noise-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+    z-index: 1;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-danger-orange to-clay bg-clip-text text-transparent;
+  }
+
+  .border-gradient {
+    border-image: linear-gradient(to right, var(--danger-orange), var(--clay)) 1;
+  }
+
+  .text-danger {
+    color: var(--danger-orange);
+  }
+}
+
+/* Stripe animation - 28.28px is the diagonal repeat distance for 20px stripes at 45deg */
+@keyframes stripe-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 28.28px 0; }
+}
+
+/* Glitch animations - more aggressive */
+@keyframes glitch-anim-1 {
+  0% { clip: rect(30px, 9999px, 10px, 0); transform: skew(0.5deg); }
+  20% { clip: rect(15px, 9999px, 50px, 0); transform: skew(-0.5deg); }
+  40% { clip: rect(60px, 9999px, 80px, 0); transform: skew(0.5deg); }
+  60% { clip: rect(20px, 9999px, 40px, 0); transform: skew(-0.5deg); }
+  80% { clip: rect(45px, 9999px, 65px, 0); transform: skew(0.5deg); }
+  100% { clip: rect(25px, 9999px, 35px, 0); transform: skew(-0.5deg); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(65px, 9999px, 85px, 0); transform: skew(-0.5deg); }
+  20% { clip: rect(10px, 9999px, 30px, 0); transform: skew(0.5deg); }
+  40% { clip: rect(40px, 9999px, 60px, 0); transform: skew(-0.5deg); }
+  60% { clip: rect(70px, 9999px, 90px, 0); transform: skew(0.5deg); }
+  80% { clip: rect(5px, 9999px, 25px, 0); transform: skew(-0.5deg); }
+  100% { clip: rect(55px, 9999px, 75px, 0); transform: skew(0.5deg); }
+}
+
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(0deg); }
+  21% { transform: skew(2deg); }
+  22% { transform: skew(-1deg); }
+  23% { transform: skew(0deg); }
+  100% { transform: skew(0deg); }
+}
+
+/* Flickering animation */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  41% { opacity: 1; }
+  42% { opacity: 0.8; }
+  43% { opacity: 1; }
+  45% { opacity: 0.3; }
+  46% { opacity: 1; }
+}
+
+.flicker {
+  animation: flicker 3s infinite;
+}
+
+/* Smoke explosion effect */
+@keyframes smoke-explode-1 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: translate(-40px, -50px) scale(1.3); filter: blur(2px); }
+}
+@keyframes smoke-explode-2 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: translate(40px, -45px) scale(1.2); filter: blur(2px); }
+}
+@keyframes smoke-explode-3 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: translate(-25px, -60px) scale(1.4); filter: blur(3px); }
+}
+@keyframes smoke-explode-4 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: translate(30px, -55px) scale(1.1); filter: blur(2px); }
+}
+@keyframes smoke-explode-5 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: translate(0, -70px) scale(1.5); filter: blur(3px); }
+}
+@keyframes smoke-explode-6 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: translate(-50px, -30px) scale(1.2); filter: blur(2px); }
+}
+@keyframes smoke-explode-7 {
+  0% { opacity: 1; transform: translate(0, 0) scale(1); filter: blur(0px); }
+  100% { opacity: 0; transform: translate(50px, -25px) scale(1.3); filter: blur(2px); }
+}
+
+.smoke-particle { pointer-events: none; }
+.smoke-1 { animation: smoke-explode-1 0.6s ease-out forwards; }
+.smoke-2 { animation: smoke-explode-2 0.7s ease-out forwards; }
+.smoke-3 { animation: smoke-explode-3 0.5s ease-out forwards; }
+.smoke-4 { animation: smoke-explode-4 0.65s ease-out forwards; }
+.smoke-5 { animation: smoke-explode-5 0.55s ease-out forwards; }
+.smoke-6 { animation: smoke-explode-6 0.6s ease-out forwards; }
+.smoke-7 { animation: smoke-explode-7 0.7s ease-out forwards; }
+
+/* Shake animation for rage clicking */
+@keyframes shake {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  10% { transform: translate(-50%, -50%) translate(-5px, -5px) rotate(-2deg); }
+  20% { transform: translate(-50%, -50%) translate(5px, 5px) rotate(2deg); }
+  30% { transform: translate(-50%, -50%) translate(-5px, 5px) rotate(-2deg); }
+  40% { transform: translate(-50%, -50%) translate(5px, -5px) rotate(2deg); }
+  50% { transform: translate(-50%, -50%) translate(-3px, -3px) rotate(-1deg); }
+  60% { transform: translate(-50%, -50%) translate(3px, 3px) rotate(1deg); }
+  70% { transform: translate(-50%, -50%) translate(-3px, 3px) rotate(-1deg); }
+  80% { transform: translate(-50%, -50%) translate(3px, -3px) rotate(1deg); }
+  90% { transform: translate(-50%, -50%) translate(-1px, -1px) rotate(0deg); }
+}
+
+/* Custom scrollbar - brutalist solid black rectangle, no background */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: none;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #FF6B35;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Firefox scrollbar - hide completely since Firefox doesn't support transparent tracks */
+/* Users can still scroll, but no visible scrollbar (matches brutalist minimal aesthetic) */
+html {
+  scrollbar-width: none;
+}
+
+/* Cursor */
+* {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF6B35' d='M5.5 3.21V20.8l3.5-3.5 2.5 5.5 2.5-1-2.5-5.5h5z'/%3E%3C/svg%3E"), auto;
+}
+
+a, button, [role="button"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23FF6B35' d='M10 6v2H5v9h9v-5h2v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6zm11-3v8h-2V6.413l-7.793 7.794-1.414-1.414L17.585 5H13V3h8z'/%3E%3C/svg%3E"), pointer;
+}
+
+/* Notification toast animations */
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in-left 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-out {
+  animation: slide-out-left 0.3s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+.notification-toast {
+  transform-origin: bottom left;
+}
+
+/* Terminal CRT Power On/Off Animations */
+.terminal-crt-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.terminal-crt-screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Power On Animation - CRT horizontal line expand */
+.terminal-power-on .terminal-crt-screen {
+  animation: crt-power-on 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes crt-power-on {
+  0% {
+    transform: scaleY(0.003) scaleX(0.2);
+    filter: brightness(4) saturate(0);
+    opacity: 1;
+  }
+  25% {
+    transform: scaleY(0.003) scaleX(0.8);
+    filter: brightness(4) saturate(0);
+  }
+  40% {
+    transform: scaleY(0.005) scaleX(1);
+    filter: brightness(3) saturate(0);
+  }
+  60% {
+    transform: scaleY(0.03) scaleX(1);
+    filter: brightness(2) saturate(0.3);
+  }
+  80% {
+    transform: scaleY(0.5) scaleX(1);
+    filter: brightness(1.3) saturate(0.7);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+    filter: brightness(1) saturate(1);
+    opacity: 1;
+  }
+}
+
+/* Power Off Animation - CRT collapse to horizontal line */
+.terminal-power-off .terminal-crt-screen {
+  animation: crt-power-off 0.5s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+
+@keyframes crt-power-off {
+  0% {
+    transform: scaleY(1) scaleX(1);
+    filter: brightness(1) saturate(1);
+    opacity: 1;
+  }
+  30% {
+    transform: scaleY(0.1) scaleX(1);
+    filter: brightness(1.5) saturate(0.7);
+  }
+  50% {
+    transform: scaleY(0.02) scaleX(1);
+    filter: brightness(2.5) saturate(0.3);
+  }
+  70% {
+    transform: scaleY(0.005) scaleX(0.6);
+    filter: brightness(3.5) saturate(0);
+    opacity: 1;
+  }
+  90% {
+    transform: scaleY(0.003) scaleX(0.2);
+    filter: brightness(5) saturate(0);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleY(0) scaleX(0);
+    filter: brightness(6) saturate(0);
+    opacity: 0;
+  }
+}
+
+/* Scanline flash effect on open */
+.terminal-scanline-flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 100;
+  animation: scanline-flash 0.6s ease-out forwards;
+}
+
+.terminal-scanline-flash::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 107, 53, 1),
+    rgba(255, 107, 53, 0.6),
+    transparent
+  );
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
+  animation: scanline-sweep 0.5s ease-out 0.1s forwards;
+}
+
+@keyframes scanline-flash {
+  0% {
+    background: rgba(255, 107, 53, 0.3);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+@keyframes scanline-sweep {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Brutalist carousel glitch effect */
+.carousel-glitch {
+  animation: brutal-glitch 150ms steps(2) forwards;
+}
+
+@keyframes brutal-glitch {
+  0% {
+    transform: translateX(-2px);
+    filter: brightness(1.1) contrast(1.2);
+  }
+  25% {
+    transform: translateX(3px) skewX(-1deg);
+    filter: brightness(0.9);
+  }
+  50% {
+    transform: translateX(-1px) skewX(1deg);
+    filter: brightness(1.2) contrast(1.1);
+  }
+  75% {
+    transform: translateX(2px);
+    filter: brightness(0.95);
+  }
+  100% {
+    transform: translateX(0);
+    filter: brightness(1) contrast(1);
+  }
+}
+
+/* ===== MOBILE OPTIMIZATIONS ===== */
+
+/* Touch-friendly tap states - brutalist instant feedback */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover states on touch devices, replace with active */
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-outline:hover {
+    transform: none;
+    box-shadow: 4px 4px 0 black;
+  }
+
+  .btn-primary:active,
+  .btn-secondary:active,
+  .btn-outline:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 black;
+  }
+
+  /* Larger touch targets on mobile */
+  .btn-primary,
+  .btn-secondary,
+  .btn-outline {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Reduce button shadows on mobile for cleaner look */
+  .larp-card:hover {
+    transform: none;
+    box-shadow: 4px 4px 0 var(--slate-dark);
+    border-color: var(--slate-dark);
+  }
+
+  .larp-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--slate-dark);
+  }
+}
+
+/* Improve mobile navigation tap areas */
+@media (max-width: 768px) {
+  nav a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Prevent text selection on interactive elements for cleaner touch UX */
+button, .btn-primary, .btn-secondary, .btn-outline, .badge, .larp-card {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scroll momentum on iOS */
+.scrollbar-hide {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent zoom on double tap for buttons and inputs */
+button, input, textarea, select {
+  touch-action: manipulation;
+}
+
+/* Prevent iOS Safari auto-zoom on input focus - must be 16px or larger */
+@media screen and (max-width: 767px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Additional iOS Safari zoom prevention */
+@supports (-webkit-touch-callout: none) {
+  /* iOS-specific styles */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  input, textarea, select {
+    font-size: max(16px, 1em);
+  }
+}
+
+/* Mobile typography enhancements */
+@media (max-width: 640px) {
+  /* Tighter line heights for mobile */
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+  }
+
+  /* Better readable line lengths on mobile */
+  p {
+    max-width: 100%;
+  }
+
+  /* Optimize monospace for mobile readability */
+  .font-mono {
+    word-spacing: -0.1em;
+  }
+
+  /* Slightly larger base text for readability */
+  .text-xs {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+
+  /* Reduce decorative shadows on mobile for cleaner look */
+  .larp-card {
+    box-shadow: 3px 3px 0 var(--slate-dark);
+  }
+
+  .terminal {
+    box-shadow:
+      0 0 0 1px rgba(255, 107, 53, 0.3),
+      0 0 20px rgba(255, 107, 53, 0.1),
+      inset 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ===== MOBILE BRUTALIST TOUCHES ===== */
+
+/* Glitch text effect on mobile tap - subtle */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:active::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 107, 53, 0.3) 50%, transparent 100%);
+    animation: mobile-glitch-sweep 0.15s ease-out;
+    pointer-events: none;
+  }
+
+  /* Brutalist border flash on tap */
+  .badge:active {
+    box-shadow: 0 0 0 2px var(--danger-orange);
+  }
+
+  /* Mobile-specific progress bar interaction */
+  .progress-bar-track:active {
+    transform: scaleY(1.2);
+  }
+}
+
+@keyframes mobile-glitch-sweep {
+  0% {
+    transform: translateX(-100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Mobile landscape optimization */
+@media (max-width: 896px) and (orientation: landscape) {
+  /* Reduce vertical spacing in landscape */
+  section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* Smaller hero in landscape */
+  .terminal {
+    max-height: 60vh;
+  }
+}
+
+/* High contrast mode support for accessibility */
+@media (prefers-contrast: high) {
+  :root {
+    --danger-orange: #FF5500;
+    --larp-red: #FF0000;
+    --larp-green: #00FF00;
+  }
+
+  .btn-primary, .btn-secondary, .btn-outline {
+    border-width: 3px;
+  }
+
+  .badge {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .construction-stripe {
+    animation: none;
+  }
+
+  .animate-pulse,
+  .animate-spin,
+  .animate-blink {
+    animation: none;
+  }
+}
