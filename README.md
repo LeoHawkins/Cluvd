@@ -46,7 +46,7 @@ $CLUVD is self-aware vaporware. no product. no roadmap. just vibes and a token.
 
 <br>
 
-<img src="[marketing-assets/promo-card-3.svg" alt="clarp quote](https://media.discordapp.net/attachments/1457051323890663569/1463502932405387438/content.png?ex=697210d1&is=6970bf51&hm=7fc35287d06cf9d6bd1e8e4aa0abfe549848087c6665eabaf88fdd0c40e0b058&=&format=webp&quality=lossless&width=1321&height=881)" width="100%" />
+<img src="https://media.discordapp.net/attachments/1457051323890663569/1463502932405387438/content.png?ex=697210d1&is=6970bf51&hm=7fc35287d06cf9d6bd1e8e4aa0abfe549848087c6665eabaf88fdd0c40e0b058&=&format=webp&quality=lossless&width=1321&height=881" width="100%" />
 
 <br>
 
