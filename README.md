@@ -2,7 +2,7 @@
 Senior Cloud/DevOps Engineer | AWS | Terraform | Azure DevOps
 <div align="center">
 
-<img src="[marketing-assets/twitter-pfp.svg](https://media.discordapp.net/attachments/1457051323890663569/1463499588181819423/mspaint_nvYlsllmk6.png?ex=69720db4&is=6970bc34&hm=2b6c5d8cd9ec50d142620e35dbf6523a9b36594cc479dc1a97cc92450c9123f1&=&format=webp&quality=lossless&width=961&height=960)" alt="$CLARP" width="128" />
+<img src="https://media.discordapp.net/attachments/1457051323890663569/1463499588181819423/mspaint_nvYlsllmk6.png?ex=69720db4&is=6970bc34&hm=2b6c5d8cd9ec50d142620e35dbf6523a9b36594cc479dc1a97cc92450c9123f1&=&format=webp&quality=lossless&width=961&height=960" alt="$CLUVD" width="128" />
 
 # $CLUVD
 
