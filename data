@@ -1,6 +1,6 @@
 [
   {
-    "name": "clarp agent",
+    "name": "cluvd agent",
     "tagline": "autonomous ai wrapper",
     "description": "chatgpt but we called it autonomous infrastructure. 41% win rate (trust us). shipping v2.",
     "features": ["gpt-4 api call (revolutionary)", "\"neural network\" in readme", "executes 0 actual trades"],
@@ -8,7 +8,7 @@
     "status": "coming-soon"
   },
   {
-    "name": "clarp modular",
+    "name": "cluvd modular",
     "tagline": "omnichain intent l3",
     "description": "it's arbitrum but we added buzzwords. modular. omnichain. intent-based. $50m raised. landing page shipped.",
     "features": ["intents (undefined)", "modular architecture (fork)", "coming q2 (forever)"],
@@ -16,7 +16,7 @@
     "status": "development"
   },
   {
-    "name": "clarp restake",
+    "name": "cluvd restake",
     "tagline": "recursive yield primitive",
     "description": "stake your stake of staked stakes. infinite recursive yield until the cascade. risk model: number go up.",
     "features": ["ponzinomics (capital efficient)", "slashing: not calculated", "yield: ∞% (theoretical)"],
@@ -24,7 +24,7 @@
     "status": "roadmap"
   },
   {
-    "name": "clarp bridge",
+    "name": "cluvd bridge",
     "tagline": "cross-chain liquidity hole",
     "description": "move your funds across chains. we promise they'll arrive. eventually. maybe. check back q2.",
     "features": ["7-day withdrawal window", "locked liquidity (ours)", "audit: pending (forever)"],
@@ -32,7 +32,7 @@
     "status": "roadmap"
   },
   {
-    "name": "clarp nft",
+    "name": "cluvd nft",
     "tagline": "pixelated money laundering",
     "description": "jpegs of cartoon animals but on the blockchain. floor price: your dignity. utility: none.",
     "features": ["10k supply (47k minted)", "roadmap: discord and vibes", "royalties: 69%"],
@@ -40,7 +40,7 @@
     "status": "coming-soon"
   },
   {
-    "name": "clarp swap",
+    "name": "cluvd swap",
     "tagline": "decentralized sandwich shop",
     "description": "swap tokens at the worst possible price. mev bots thank you for your service.",
     "features": ["99% slippage tolerance", "front-run as a service", "fees: yes"],
@@ -48,7 +48,7 @@
     "status": "development"
   },
   {
-    "name": "clarp lend",
+    "name": "cluvd lend",
     "tagline": "overcollateralized poverty",
     "description": "deposit $1000 to borrow $500. revolutionary. the missing $500? innovation tax.",
     "features": ["150% collateral ratio", "liquidation: instant", "interest: variable (always up)"],
@@ -56,7 +56,7 @@
     "status": "roadmap"
   },
   {
-    "name": "clarp dao",
+    "name": "cluvd dao",
     "tagline": "decentralized autocracy",
     "description": "vote on proposals that the team will ignore anyway. governance theater at its finest.",
     "features": ["1 token = 1 delusion", "team has 80% supply", "quorum: whatever we want"],
@@ -64,7 +64,7 @@
     "status": "development"
   },
   {
-    "name": "clarp oracle",
+    "name": "cluvd oracle",
     "tagline": "trust us bro price feed",
     "description": "we tell you what the price is. you believe us. that's the oracle. that's the whole thing.",
     "features": ["price: our best guess", "update frequency: vibes", "manipulation: built-in"],
@@ -72,7 +72,7 @@
     "status": "roadmap"
   },
   {
-    "name": "clarp vault",
+    "name": "cluvd vault",
     "tagline": "automated yield rugging",
     "description": "deposit your tokens. we farm yields. you get receipts. where are the yields? q2.",
     "features": ["auto-compound (our bags)", "performance fee: 47%", "emergency withdrawal: no"],
@@ -80,7 +80,7 @@
     "status": "coming-soon"
   },
   {
-    "name": "clarp perpetuals",
+    "name": "cluvd perpetuals",
     "tagline": "infinite loss engine",
     "description": "100x leverage on assets that don't exist. your liquidation funds our holiday.",
     "features": ["leverage: irresponsible", "funding rate: yes", "insurance fund: lol"],
@@ -88,7 +88,7 @@
     "status": "roadmap"
   },
   {
-    "name": "clarp social",
+    "name": "cluvd social",
     "tagline": "friend.tech but worse",
     "description": "buy shares in influencers who will abandon the platform in 3 weeks. premium cope.",
     "features": ["key price: exponential", "exit liquidity: you", "utility: parasocial"],
@@ -96,7 +96,7 @@
     "status": "coming-soon"
   },
   {
-    "name": "clarp launch",
+    "name": "cluvd launch",
     "tagline": "fair launch theater",
     "description": "launchpad for tokens that will rug. we take 5%. they take everything. very fair.",
     "features": ["kyc: anime pfp", "allocation: insiders only", "refunds: see terms (no)"],
@@ -104,7 +104,7 @@
     "status": "development"
   },
   {
-    "name": "clarp identity",
+    "name": "cluvd identity",
     "tagline": "doxxed to the blockchain",
     "description": "on-chain identity for people who don't understand privacy. soulbound means you can't escape.",
     "features": ["soulbound (trapped)", "reputation: fabricated", "privacy: none"],
@@ -112,7 +112,7 @@
     "status": "development"
   },
   {
-    "name": "clarp gaming",
+    "name": "cluvd gaming",
     "tagline": "play to lose",
     "description": "games where you pay to play, pay to win, and still lose. revolutionary entertainment.",
     "features": ["nft skins: required", "gameplay: optional", "fun: not included"],
@@ -120,7 +120,7 @@
     "status": "roadmap"
   },
   {
-    "name": "clarp insurance",
+    "name": "cluvd insurance",
     "tagline": "rug coverage (excluded)",
     "description": "buy insurance for smart contract hacks. exclusions: everything that actually happens.",
     "features": ["coverage: theoretical", "claims: denied", "premium: expensive"],
@@ -128,7 +128,7 @@
     "status": "roadmap"
   },
   {
-    "name": "clarp index",
+    "name": "cluvd index",
     "tagline": "diversified bags",
     "description": "own a basket of 20 failing tokens instead of just 1. diversified poverty.",
     "features": ["rebalancing: monthly rugs", "management fee: 5%", "returns: negative"],
